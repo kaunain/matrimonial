@@ -90,7 +90,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: long
         name:
           type: string
         age:
