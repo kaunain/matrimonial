@@ -1,27 +1,28 @@
 openapi: 3.0.3
 info:
-  title: Matrimonial App API
-  description: API specifications for a matrimonial app
+  title: Matrimonial API
   version: 1.0.0
-
+  description: API for a matrimonial application
 servers:
-  - url: http://localhost:8080/api/v1
+  - url: http://localhost:8080
+    description: Local server
 
 paths:
   /users:
     get:
       summary: Get all users
-      operationId: getUsers
+      operationId: getAllUsers
       responses:
         '200':
-          description: OK
+          description: List of all users
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
-    
+                  $ref: '#/components/schemas/UserDTO'
+        # Other response codes
+
     post:
       summary: Create a new user
       operationId: createUser
@@ -30,63 +31,90 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserInput'
+              $ref: '#/components/schemas/UserDTO'
       responses:
         '201':
-          description: Created
+          description: User created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-  
+                $ref: '#/components/schemas/UserDTO'
+        # Other response codes
+    delete:
+      summary: Delete all users
+      operationId: deleteAllUsers
+      responses:
+        '204':
+          description: All users deleted successfully
+        # Other response codes
+
   /users/{userId}:
     get:
       summary: Get a user by ID
       operationId: getUserById
       parameters:
-        - name: userId
-          in: path
-          required: true
+        - in: path
+          name: userId
           schema:
-            type: string
+            type: integer
+            format: int64
+          required: true
+          description: ID of the user to retrieve
       responses:
         '200':
-          description: OK
+          description: User found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '404':
-          description: User not found
-  
+                $ref: '#/components/schemas/UserDTO'
+        # Other response codes
+
     put:
       summary: Update a user by ID
       operationId: updateUserById
       parameters:
-        - name: userId
-          in: path
-          required: true
+        - in: path
+          name: userId
           schema:
-            type: string
+            type: integer
+            format: int64
+          required: true
+          description: ID of the user to update
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserInput'
+              $ref: '#/components/schemas/UserDTO'
       responses:
         '200':
-          description: OK
+          description: User updated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '404':
-          description: User not found
+                $ref: '#/components/schemas/UserDTO'
+        # Other response codes
+
+    delete:
+      summary: Delete a user by ID
+      operationId: deleteUserById
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: ID of the user to delete
+      responses:
+        '204':
+          description: User deleted successfully
+        # Other response codes
+
 
 components:
   schemas:
-    User:
+    UserDTO:
       type: object
       properties:
         id:
@@ -94,19 +122,44 @@ components:
           format: int64
         name:
           type: string
-        age:
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        height:
           type: integer
-        gender:
+        maritalStatus:
           type: string
-        # Add more properties as needed
-  
-    UserInput:
-      type: object
-      properties:
-        name:
+        religion:
           type: string
-        age:
+        caste:
+          type: string
+        motherTongue:
+          type: string
+        educationLevel:
+          type: string
+        occupation:
+          type: string
+        annualIncome:
           type: integer
-        gender:
+        fatherName:
           type: string
-        # Add more properties as needed
+        motherName:
+          type: string
+        numberOfSiblings:
+          type: integer
+        familyBackground:
+          type: string
+        nativePlace:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string

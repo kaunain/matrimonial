@@ -1,7 +1,7 @@
 package com.itechf.backend;
 
 import org.openapitools.api.UsersApi;
-import org.openapitools.model.User;
+import org.openapitools.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,26 +10,26 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController implements UsersApi{
+public class UserController implements UsersApi {
 
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
+        UserDTO createdUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        User user = userService.getUserById(userId);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId) {
+        UserDTO user = userService.getUserById(userId);
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
@@ -37,8 +37,8 @@ public class UserController implements UsersApi{
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> updateUserById(@PathVariable Long userId, @RequestBody User updatedUser) {
-        User savedUser = userService.updateUser(userId, updatedUser);
+    public ResponseEntity<UserDTO> updateUserById(@PathVariable Long userId, @RequestBody UserDTO updatedUser) {
+        UserDTO savedUser = userService.updateUser(userId, updatedUser);
         if (savedUser == null) {
             return ResponseEntity.notFound().build();
         }
