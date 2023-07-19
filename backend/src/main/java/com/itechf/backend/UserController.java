@@ -38,19 +38,10 @@ public class UserController implements UsersApi{
 
     @PutMapping("/{userId}")
     public ResponseEntity<User> updateUserById(@PathVariable Long userId, @RequestBody User updatedUser) {
-        User user = userService.getUserById(userId);
-        if (user == null) {
+        User savedUser = userService.updateUser(userId, updatedUser);
+        if (savedUser == null) {
             return ResponseEntity.notFound().build();
         }
-        // Update the user with the new data
-        if(updatedUser.getName() != null)
-            user.setName(updatedUser.getName());
-        if(updatedUser.getAge() != null)
-            user.setAge(updatedUser.getAge());
-        if(updatedUser.getGender() != null)
-        user.setGender(updatedUser.getGender());
-
-        User savedUser = userService.updateUser(user);
         return ResponseEntity.ok(savedUser);
     }
 }
