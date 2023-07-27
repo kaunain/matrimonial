@@ -2,9 +2,12 @@
 ###
 @authHost = http://localhost:8080/auth
 
+### Bearer Token
+@auth = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDQ4ODgyOCwiaWF0IjoxNjkwNDcwODI4fQ.LP_0vtiCNp8G0xL_REqQ-V1a61-y6CEqZWYaNG7UanTfvn1VyTkOqLJ_Bfj04j7EgyyffFZxiBAJGvnGylCYBA
+
 ### get All
 GET {{host}}/users HTTP/1.1
-Authorization: admin:admin
+Authorization: {{auth}}
 
 ### Login
 POST {{authHost}}/login HTTP/1.1
@@ -18,6 +21,7 @@ Content-Type: application/json
 ### save one Users
 
 POST {{host}}/users HTTP/1.1
+Authorization: {{auth}}
 Content-Type: application/json
 
 {
@@ -29,12 +33,14 @@ Content-Type: application/json
 
 ### get one user
 GET {{host}}/users/2 HTTP/1.1
+Authorization: {{auth}}
 
 ### update given user
-PUT {{host}}/users/5 HTTP/1.1
+PUT {{host}}/users/3 HTTP/1.1
+Authorization: {{auth}}
 Content-Type: application/json
 
 {
-    "name" : "Raju",
-    "age": 24
+    "email": "a@in.com",
+    "phoneNumber": "9873431289"
 }
