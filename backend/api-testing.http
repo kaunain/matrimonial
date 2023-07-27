@@ -1,8 +1,19 @@
 @host = http://localhost:8080/api
+###
+@authHost = http://localhost:8080/auth
 
 ### get All
-
 GET {{host}}/users HTTP/1.1
+Authorization: admin:admin
+
+### Login
+POST {{authHost}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"admin",
+    "password": "admin"
+}
 
 ### save one Users
 
