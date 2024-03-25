@@ -3,6 +3,7 @@ package com.itechf.backend;
 import org.openapitools.api.UsersApi;
 import org.openapitools.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,18 @@ public class UserController implements UsersApi {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private Environment env;
+
+    private String getActiveProfile() {
+        String[] activeProfiles = env.getActiveProfiles();
+        if (activeProfiles.length > 0) {
+            return "Active profile(s): " + String.join(",", activeProfiles);
+        } else {
+            return "No active profile detected";
+        }
+    }
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
@@ -33,6 +46,7 @@ public class UserController implements UsersApi {
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
+        user.setCaste(getActiveProfile());
         return ResponseEntity.ok(user);
     }
 

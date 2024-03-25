@@ -3,7 +3,8 @@
 @authHost = http://localhost:8080/auth
 
 ### Bearer Token
-@auth = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDQ4ODgyOCwiaWF0IjoxNjkwNDcwODI4fQ.LP_0vtiCNp8G0xL_REqQ-V1a61-y6CEqZWYaNG7UanTfvn1VyTkOqLJ_Bfj04j7EgyyffFZxiBAJGvnGylCYBA
+@auth = Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMTM2NDk1NCwiaWF0IjoxNzExMzQ2OTU0fQ.kYvHAm8ZO_kb4_9VDhd77gBcrl-gn64fliyp0msRcg8WI0OkJIy6M4Ci26ePpXXbE1ZZh6EAdU_m35oX8e3eZA
+
 
 ### get All
 GET {{host}}/users HTTP/1.1
